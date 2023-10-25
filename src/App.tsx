@@ -1,28 +1,17 @@
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-
-import BookList from './components/BookList';
-import AddBook from './components/AddBook';
-
-// ---------------------------------------------------------------------------
-// Apollo client setup
-// ---------------------------------------------------------------------------
-
-const client = new ApolloClient({
-    uri: 'http://localhost:3000/graphql',
-    cache: new InMemoryCache(),
-});
+import { RouterProvider } from 'react-router-dom';
+import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
+import router from './routes';
 
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 
 function App() {
+    loadDevMessages();
+    loadErrorMessages();
+
     return (
         <div id="main">
-            <ApolloProvider client={client}>
-                <h1>Reading List</h1>
-                <BookList />
-                <AddBook />
-            </ApolloProvider>
+            <RouterProvider router={router} />
         </div>
     );
 }

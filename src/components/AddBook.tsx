@@ -1,14 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { addBookMutation, getAuthorsQuery } from '../queries/queries';
+import { addBookMutation, getAuthorsQuery, getBooksQuery } from '../queries/queries';
 import { useState } from 'react';
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-interface Author {
-    id: string;
-    name: string;
-}
+import { Author } from '../dto/interfaces';
 
 // ---------------------------------------------------------------------------
 // https://www.apollographql.com/docs/react/data/mutations
@@ -37,6 +30,7 @@ const AddBook = () => {
                 genre: genre,
                 authorId: author,
             },
+            refetchQueries: [{ query: getBooksQuery }],
         });
     };
 
